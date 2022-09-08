@@ -86,9 +86,7 @@ function App() {
   const ctx = useRef( new ( window.AudioContext || window.webkitAudioContext)() );
   
   const [ isPlaying, setIsPlaying ] = useState( false );
-  const [ source, setSource ] = useState( null );
   const [ analyser, setAnalyser ] = useState( null );
-  const [ db, setDb ] = useState( 0 );
 
   const playHandler = () => {
     if ( ! isPlaying || song.current.paused ) {
@@ -103,7 +101,6 @@ function App() {
 
   useEffect(() => {
     const src = ctx.current.createMediaElementSource( song.current );
-    setSource( src );
 
     //connect analayser to source
     const analyser = ctx.current.createAnalyser();
@@ -116,7 +113,7 @@ function App() {
     <main style={{ width: '100vw', height: '100vh', backgroundColor: '#1B1B1B', backgroundImage:`url(${rainyWindow}`}}>
       <Canvas camera={{ position: [0.0, 0.0, 0.7] }}>
         <CameraController />
-        <Scene isPlaying={isPlaying} analyser={analyser} setDb={setDb}/>
+        <Scene isPlaying={isPlaying} analyser={analyser}/>
       </Canvas>
       <div className="player-container">
         <button onClick={playHandler}>Play/Pause</button>
