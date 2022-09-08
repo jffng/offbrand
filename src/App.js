@@ -1,24 +1,30 @@
 import ReactDOM from 'react-dom'
 import React, { Suspense, useRef, useState, useMemo, useEffect } from 'react'
-import { Canvas, useFrame, useLoader } from 'react-three-fiber'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber' //i had to re install this..idk why
 import { TextureLoader, Uniform } from "three"
 import rainyWindow from './assets/rainy-window.jpg';
 import vertexShader from './vertexShader';
 import fragmentShader from './fragmentShader';
 
 function Scene() {
-  const imageTexture = useLoader(TextureLoader, rainyWindow );
+  const imageTexture = useLoader(TextureLoader, rainyWindow);
   const mesh = useRef();
 
+  //added the type and value for all the uniforms bc shaders are annoying
   const uniforms = useMemo(
     () => ({
       u_time: {
+        type: "f",
         value: 0.0
       },
       u_size: {
-        value: 12.0
+        type: "f",
+        value: 1.0
       },
-      u_image: imageTexture
+      u_image: { 
+        type: "t",
+        value: imageTexture
+      }
     }), []
   );
 
