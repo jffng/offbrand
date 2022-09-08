@@ -103,9 +103,6 @@ uniform float u_size;
 const int octaves = 5;
 const float persistence = 0.5;
 
-vec3 colorA = vec3(0.912,0.191,0.652);
-vec3 colorB = vec3(1.000,0.777,0.052);
-
 vec3 mod289(vec3 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
