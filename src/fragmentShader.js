@@ -1,9 +1,12 @@
+//i added in vUv here instead of gl_FragCoord...once again something with webgl vs three but also dont quote me
 const fragmentShader = `
+varying vec2 vUv;
 precision highp float;
 
 uniform sampler2D u_image;
 uniform float u_time;
 uniform float u_size;
+uniform float u_db;
 const int octaves = 5;
 const float persistence = 0.5;
 
@@ -81,28 +84,14 @@ float onoise(vec3 v) {
 }
 
 vec2 pattern(vec2 p) {
-    float x = onoise(vec3(p + vec2(0.0, 0.0), u_time / 10.0));
-    float y = onoise(vec3(p + vec2(5.2, 1.3), u_time / 10.0));
-    return p + vec2(x, y) * 0.5;
+    float x = onoise(vec3(p + vec2(0.0, 0.0), u_time / 20.0));
+    float y = onoise(vec3(p + vec2(5.2, 1.3), u_time / 20.0));
+    return p + vec2(x, y) * ( 0.1 + u_db );
 }
 
 void main() {
-  gl_FragColor = texture2D(u_image, pattern(gl_FragCoord.xy / u_size));
+  gl_FragColor = texture2D(u_image, pattern(vUv.xy / u_size));
 }
 `
-
-// test shader: 
-// const fragmentShader = `
-// varying vec2 vUv;
-
-// vec3 colorA = vec3(0.912,0.191,0.652);
-// vec3 colorB = vec3(1.000,0.777,0.052);
-
-// void main() {
-//   vec3 color = mix(colorA, colorB, vUv.x);
-
-//   gl_FragColor = vec4(color,1.0);
-// }
-// `
 
 export default fragmentShader;
