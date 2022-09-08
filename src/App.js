@@ -48,7 +48,7 @@ function Scene( { isPlaying, analyser, setDb } ) {
         type: "t",
         value: imageTexture
       }
-    }), []
+    }), [ imageTexture ]
   );
 
   useFrame((state) => {
