@@ -100,8 +100,8 @@ function UI( { playHandler, isPlaying }) {
   return (
     <div className="ui-container">
         <Text style={{
-          width: 'calc( 100% - 4rem )',
-          maxHeight: 'calc( 100% - 4rem)'
+          width: '100%',
+          height: '100%'
 
         }}/>
         <button id='play-button' onClick={playHandler}>{ isPlaying ? 'Stop' : 'Play' }</button>
