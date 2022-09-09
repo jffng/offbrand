@@ -77,8 +77,8 @@ function Scene( { isPlaying, analyser, setDb } ) {
       for (const amplitude of pcmData) { sumSquares += amplitude*amplitude; }
       // nums.reduce((a, b) => (a + b)) / nums.length;
 
-      // setDb( Math.sqrt(sumSquares / pcmData.length) );
-      mesh.current.material.uniforms.u_db.value = Math.max(0.3, Math.sqrt(sumSquares / pcmData.length) )
+      // mesh.current.material.uniforms.u_db.value = Math.max(0.3, Math.sqrt(sumSquares / pcmData.length) )
+      mesh.current.material.uniforms.u_db.value = Math.min( Math.max(0.3, Math.sqrt(sumSquares / pcmData.length)), .5);
     }
   });
 
@@ -105,7 +105,7 @@ function UI( { playHandler, isPlaying }) {
 
         }}/>
         <button id='play-button' onClick={playHandler}>{ isPlaying ? 'Stop' : 'Play' }</button>
-        <a id='bandcamp-link' rel="noreferrer" href='https://offbrandnyc.bandcamp.com' target="_blank">bandcamp</a>
+        <a id='bandcamp-link' rel="noreferrer" href='https://offbrandnyc.bandcamp.com' target="_blank">buy 🔗</a>
     </div>
   )
 }

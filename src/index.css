@@ -39,8 +39,9 @@ a {
   line-height: 1.2;
 }
 
+button:hover,
 a:hover {
-  text-decoration: underline;
+  font-style: normal;
 }
 
 #play-button {
