@@ -16,7 +16,7 @@ function Loader( { setLoaded } ) {
 
   useEffect( () => {
     setLoaded( loaded );
-  }, [ loaded ])
+  }, [ setLoaded, loaded ])
   return (
     <Html center>
       <h2 style={{color: 'white', textAlign: 'center', letterSpacing: '0.02em', fontSize: '3rem'}}>LOADING STUFF</h2>
@@ -105,7 +105,7 @@ function UI( { playHandler, isPlaying }) {
 
         }}/>
         <button id='play-button' onClick={playHandler}>{ isPlaying ? 'Stop' : 'Play' }</button>
-        <a id='bandcamp-link' href='https://offbrandnyc.bandcamp.com' target="_blank">bandcamp</a>
+        <a id='bandcamp-link' rel="noreferrer" href='https://offbrandnyc.bandcamp.com' target="_blank">bandcamp</a>
     </div>
   )
 }
