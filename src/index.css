@@ -3,21 +3,54 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
 }
 
 main {
   position: relative;
 }
 
-.player-container {
+.ui-container {
+  display: flex;
   position: absolute;
-  bottom: 3rem;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  padding: 2rem;
+}
+
+button,
+a {
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
   color: white;
+  text-transform: uppercase;
+  font-size: 2rem;
+  /* font-weight: bold; */
+  letter-spacing: .02em;
+  font-style: italic;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#play-button {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+#bandcamp-link {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
 }

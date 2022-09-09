@@ -1,12 +1,27 @@
-import React, { useRef, useState, useMemo, useEffect } from 'react'
+import React, { useRef, Suspense, useState, useMemo, useEffect } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber' //i had to re install this..idk why
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { TextureLoader } from "three"
+import { Html, useProgress } from '@react-three/drei';
 
 import rainyWindow from './assets/rainy-window.jpg';
+import background from './assets/background.webp';
+import { ReactComponent as Text } from './assets/text.svg';
 import mp3 from './assets/took-a-trip.mp3';
 import vertexShader from './vertexShader';
 import fragmentShader from './fragmentShader';
+
+function Loader( { setLoaded } ) {
+  const { loaded } = useProgress();
+
+  useEffect( () => {
+    setLoaded( loaded );
+  }, [ loaded ])
+  return (
+    <Html center>
+      <h2 style={{color: 'white', textAlign: 'center', letterSpacing: '0.02em', fontSize: '3rem'}}>LOADING STUFF</h2>
+    </Html>)
+}
 
 const CameraController = () => {
   const { camera, gl } = useThree();
@@ -81,12 +96,27 @@ function Scene( { isPlaying, analyser, setDb } ) {
   )
 }
 
+function UI( { playHandler, isPlaying }) { 
+  return (
+    <div className="ui-container">
+        <Text style={{
+          width: 'calc( 100% - 4rem )',
+          maxHeight: 'calc( 100% - 4rem)'
+
+        }}/>
+        <button id='play-button' onClick={playHandler}>{ isPlaying ? 'Stop' : 'Play' }</button>
+        <a id='bandcamp-link' href='https://offbrandnyc.bandcamp.com' target="_blank">bandcamp</a>
+    </div>
+  )
+}
+
 function App() {
   const song = useRef( new Audio( mp3) );
   const ctx = useRef( new ( window.AudioContext || window.webkitAudioContext)() );
   
   const [ isPlaying, setIsPlaying ] = useState( false );
   const [ analyser, setAnalyser ] = useState( null );
+  const [ isLoaded, setIsLoaded ] = useState( false );
 
   const playHandler = () => {
     if ( ! isPlaying || song.current.paused ) {
@@ -110,14 +140,14 @@ function App() {
   },[ ]);
 
   return (
-    <main style={{ width: '100vw', height: '100vh', backgroundColor: '#1B1B1B', backgroundImage:`url(${rainyWindow}`}}>
-      <Canvas camera={{ position: [0.0, 0.0, 0.7] }}>
-        <CameraController />
-        <Scene isPlaying={isPlaying} analyser={analyser}/>
+    <main style={{ width: '100vw', height: '100vh', backgroundColor: '#1B1B1B', backgroundImage:`url(${background}`, backgroundSize: 'cover'}}>
+      <Canvas camera={{ position: [-0.3, -0.05, 0.8] }}>
+        <Suspense fallback={<Loader setLoaded={setIsLoaded} />}>
+          <CameraController />
+          <Scene isPlaying={isPlaying} analyser={analyser}/>
+        </Suspense>
       </Canvas>
-      <div className="player-container">
-        <button onClick={playHandler}>Play/Pause</button>
-      </div>
+        { isLoaded && <UI isPlaying={isPlaying} playHandler={playHandler}/> }
     </main>
   );
 }
