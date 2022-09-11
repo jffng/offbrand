@@ -16,12 +16,23 @@ main {
 
 .ui-container {
   display: flex;
+  flex-direction: column;
   position: absolute;
   width: 100vw;
   height: 100vh;
   left: 0;
   top: 0;
   padding: var(--spacing-outer);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ui-container nav svg {
+  height: 48px;
 }
 
 button,
@@ -35,27 +46,27 @@ a {
   font-size: 1rem;
   font-size: clamp(1.25rem, 0.6666666666666667rem + 1.6666666666666667vw, 2rem);
   letter-spacing: .02em;
-  font-style: italic;
   text-decoration: none;
   line-height: 1.2;
 }
 
 button:hover,
 a:hover {
-  font-style: normal;
+  font-style: italic;
 }
 
 #play-button {
   position: absolute;
   bottom: var(--spacing-outer);
   right: var(--spacing-outer);
+  font-family: monospace;
 }
 
-#bandcamp-link {
+/* #bandcamp-link {
   position: absolute;
   bottom: var(--spacing-outer);
   left: var(--spacing-outer);
-}
+} */
 
 @media screen and (max-width: 420px){
   #bandcamp-link,

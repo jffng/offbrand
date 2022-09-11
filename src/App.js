@@ -1,12 +1,19 @@
 import React, { useRef, Suspense, useState, useMemo, useEffect } from 'react'
-import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber' //i had to re install this..idk why
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { Canvas, useFrame, useLoader } from '@react-three/fiber' //i had to re install this..idk why
 import { TextureLoader } from "three"
 import { Html, useProgress } from '@react-three/drei';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
+import About from './components/about';
 import rainyWindow from './assets/rainy-window.jpg';
 import background from './assets/background.webp';
 import { ReactComponent as Text } from './assets/text.svg';
+import { ReactComponent as Logo } from './assets/off.svg';
 import mp3 from './assets/took-a-trip.mp3';
 import vertexShader from './vertexShader';
 import fragmentShader from './fragmentShader';
@@ -22,23 +29,6 @@ function Loader( { setLoaded } ) {
       <h2 style={{color: 'white', textAlign: 'center', letterSpacing: '0.02em', fontSize: '3rem'}}>LOADING STUFF</h2>
     </Html>)
 }
-
-const CameraController = () => {
-  const { camera, gl } = useThree();
-  useEffect(
-    () => {
-      const controls = new OrbitControls(camera, gl.domElement);
-
-      controls.minDistance = 0.5;
-      controls.maxDistance = 10;
-      return () => {
-        controls.dispose();
-      };
-    },
-    [camera, gl]
-  );
-  return null;
-};
 
 function Scene( { isPlaying, analyser, setDb } ) {
   const imageTexture = useLoader(TextureLoader, rainyWindow);
@@ -99,13 +89,27 @@ function Scene( { isPlaying, analyser, setDb } ) {
 function UI( { playHandler, isPlaying }) { 
   return (
     <div className="ui-container">
-        <Text style={{
-          width: '100%',
-          height: '100%'
+        <nav style={{paddingBottom: '.5rem', borderBottom: '2px solid white', marginBottom: '2rem'}}>
+          <a id='bandcamp-link' rel="noreferrer" href='https://offbrandnyc.bandcamp.com' target="_blank">Music 🔗</a>
+          <Link to="/mixes">Mixes</Link>
+          <Link to="/about">About</Link>
+          <Link to="/"><Logo/></Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Text style={{
+                width: '100%',
+                height: '100%'
 
-        }}/>
+              }}/>
+            </>
+          }>
+          </Route>
+          <Route path="/about" element={<About/>}>
+          </Route>
+        </Routes>
         <button id='play-button' onClick={playHandler}>{ isPlaying ? 'Stop' : 'Play' }</button>
-        <a id='bandcamp-link' rel="noreferrer" href='https://offbrandnyc.bandcamp.com' target="_blank">buy 🔗</a>
     </div>
   )
 }
@@ -140,15 +144,16 @@ function App() {
   },[ ]);
 
   return (
-    <main style={{ width: '100vw', height: '100vh', backgroundColor: '#1B1B1B', backgroundImage:`url(${background}`, backgroundSize: 'cover'}}>
-      <Canvas camera={{ position: [-0.3, -0.05, 0.8] }}>
-        <Suspense fallback={<Loader setLoaded={setIsLoaded} />}>
-          <CameraController />
-          <Scene isPlaying={isPlaying} analyser={analyser}/>
-        </Suspense>
-      </Canvas>
+    <Router>
+      <main style={{ width: '100vw', height: '100vh', backgroundColor: '#1B1B1B', backgroundImage:`url(${background}`, backgroundSize: 'cover'}}>
+        <Canvas camera={{ position: [-0.3, -0.05, 0.8] }}>
+          <Suspense fallback={<Loader setLoaded={setIsLoaded} />}>
+            <Scene isPlaying={isPlaying} analyser={analyser}/>
+          </Suspense>
+        </Canvas>
         { isLoaded && <UI isPlaying={isPlaying} playHandler={playHandler}/> }
-    </main>
+      </main>
+    </Router>
   );
 }
 
