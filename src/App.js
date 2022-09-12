@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 
 import About from './components/about';
+import Mixes from './components/mixes';
 import rainyWindow from './assets/rainy-window.jpg';
 import background from './assets/background.webp';
 import { ReactComponent as Text } from './assets/text.svg';
@@ -90,10 +91,10 @@ function UI( { playHandler, isPlaying }) {
   return (
     <div className="ui-container">
         <nav style={{paddingBottom: '.5rem', borderBottom: '2px solid white', marginBottom: '2rem'}}>
-          <a id='bandcamp-link' rel="noreferrer" href='https://offbrandnyc.bandcamp.com' target="_blank">Music 🔗</a>
-          <Link to="/mixes">Mixes</Link>
-          <Link to="/about">About</Link>
           <Link to="/"><Logo/></Link>
+          <Link to="/about">About</Link>
+          <Link to="/mixes">Mixes</Link>
+          <a id='bandcamp-link' rel="noreferrer" href='https://offbrandnyc.bandcamp.com' target="_blank">Music 🔗</a>
         </nav>
         <Routes>
           <Route path="/" element={
@@ -107,6 +108,8 @@ function UI( { playHandler, isPlaying }) {
           }>
           </Route>
           <Route path="/about" element={<About/>}>
+          </Route>
+          <Route path="/mixes" element={<Mixes/>}>
           </Route>
         </Routes>
         <button id='play-button' onClick={playHandler}>{ isPlaying ? 'Stop' : 'Play' }</button>

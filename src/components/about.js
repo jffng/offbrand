@@ -1,32 +1,39 @@
 const About = () => {
     return <div style={{
         maxWidth: '660px',
-        marginTop: '-2rem',
+        margin: '-2rem 0',
         color: 'white',
-        fontSize: '1.4rem',
         fontWeight: '300',
         overflow: 'scroll',
         maxHeight: '100%',
-        lineHeight: '1.4'
     }}>
         <p>
-            off brand is the creative moniker of jeff ong.
+        off brand is a project and moniker of jeff ong.
         </p>
         <p>
-it is a personal gesture made public towards processing sounds, aesthetics, and ideas consumed in the ongoing and expanding milieu of dance music. commercial identity 
+        It is both a personal gesture made public towards processing sounds, aesthetics, and ideas consumed in the dance music milieu, and a play on the language of marketing and late capitalism — an attempt to resist the increasing commoditization of all aspects of creative life and imagine an alternative.
         </p>
         <p>
-In a context that is completely commercialized, it is the packaging and distribution of . there is no true artistic statement that can be made devoid of the context of capitalism. Either you choose to be intentionally unaware, or address it through whatever means necessary. 
+            Dance music is often understood and interpreted through functional (how does it make me move), aesthetic (what does it sound like), and political (to whom does it belong) perspectives. 
         </p>
-dance music, especially of the “underground” variety, is frequently understood and evaluated through functional, aesthetic, and political perspectives. 
-<br/>
-while neither possible nor desirable to detach from these contexts, my process and practice derives first from lived experience: what sounds and frequencies move me, why do they move me, what was the environment in which I heard them, and what feelings do they arouse? Expectation, longing, heartache, grief, angst, hope — sometimes, but not always, all at once. 
-<br/>
-The expression that there is nothing to express, nothing with which to express, nothing from which to express, no power to express, no desire to express, together with the obligation to express.
-<br/>
-synthesizing these emotions into works of art that resonate with others is challenging, and something i have yet to achieve, but will continue to try via the platforms like this and others whose creative visions align. not for desire of money or fame, but, in one sense, duty — in service of a scene, culture, and community of friends and collaborators that continues to shape me.
-<br/>
-9/11/2022
+        <p>
+            While neither possible nor useful to detach from these contexts, my process and practice derives primarily from lived experience: what sounds and frequencies move me and why, what was the environment in which I heard them, what feelings do they arouse? Anticipation, longing, fear, heartache, grief, angst, release, hope — sometimes, not always, all at once. And how might reflections and interpretations of those emotions be shared in a way that subverts the self-exploitative nature of media and culture today? 
+        </p>
+        <p><em>
+            The expression that there is nothing to express, nothing with which to express, nothing from which to express, no power to express, no desire to express, together with the obligation to express.<br/>&emsp;— Samuel Beckett
+        </em></p>
+        <p>
+            Synthesizing these ideas into works that resonate with others is something I feel I have yet to achieve, but will endeavor to try via platforms like this and with others whose creative visions align, in service of a scene, culture, and community of friends and collaborators that continues to shape me.
+        </p>
+        <p>
+            11 September, 2022
+        </p>
+        <p style={{fontSize: 'var(--font-size--sm'}}>
+            Logo and "Took a Trip" cover design and shader consulting by <a href="https://www.wipawe.com/">Wipawe</a>.
+        </p>
+        <p style={{fontSize: 'var(--font-size--sm'}}>
+            Image warping shader is a based on <a href="https://observablehq.com/@mbostock/image-warping">Bostock's</a>.
+        </p>
     </div>
 }
 
