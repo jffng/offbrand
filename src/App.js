@@ -8,11 +8,14 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ReactAudioPlayer from 'react-audio-player';
 
 import About from './components/about';
 import Mixes from './components/mixes';
 import rainyWindow from './assets/rainy-window.jpg';
 import background from './assets/background.webp';
+import { ReactComponent as Play } from './assets/play.svg';
+import { ReactComponent as Pause } from './assets/pause.svg';
 import { ReactComponent as Text } from './assets/text.svg';
 import { ReactComponent as Logo } from './assets/off.svg';
 import mp3 from './assets/took-a-trip.mp3';
@@ -96,6 +99,7 @@ function UI( { playHandler, isPlaying }) {
           <Link to="/mixes">Mixes</Link>
           <a id='bandcamp-link' rel="noreferrer" href='https://offbrandnyc.bandcamp.com' target="_blank">Music 🔗</a>
         </nav>
+        <button id='play-button' onClick={playHandler}>{ isPlaying ? <Pause/> : <Play/> }</button>
         <Routes>
           <Route path="/" element={
             <>
@@ -112,39 +116,39 @@ function UI( { playHandler, isPlaying }) {
           <Route path="/mixes" element={<Mixes/>}>
           </Route>
         </Routes>
-        <button id='play-button' onClick={playHandler}>{ isPlaying ? 'Stop' : 'Play' }</button>
     </div>
   )
 }
 
 function App() {
-  const song = useRef( new Audio( mp3) );
-  const ctx = useRef( new ( window.AudioContext || window.webkitAudioContext)() );
-  
+  const [ audioRef, setAudioRef ] = useState( null );
   const [ isPlaying, setIsPlaying ] = useState( false );
   const [ analyser, setAnalyser ] = useState( null );
   const [ isLoaded, setIsLoaded ] = useState( false );
+  const ctx = useRef( new ( window.AudioContext || window.webkitAudioContext)() );
 
   const playHandler = () => {
-    if ( ! isPlaying || song.current.paused ) {
-      song.current.play();
+    if ( ! isPlaying || audioRef.audioEl.current.paused ) {
+      audioRef.audioEl.current.play();
       ctx.current.resume();
       setIsPlaying( true );
     } else {
-      song.current.pause();
+      audioRef.audioEl.current.pause();
       setIsPlaying( false );
     }
   }
 
   useEffect(() => {
-    const src = ctx.current.createMediaElementSource( song.current );
+    if ( audioRef ){
+      const src = ctx.current.createMediaElementSource( audioRef.audioEl.current );
 
-    //connect analayser to source
-    const analyser = ctx.current.createAnalyser();
-    src.connect( analyser );
-    analyser.connect(ctx.current.destination);
-    setAnalyser( analyser );
-  },[ ]);
+      //connect analayser to source
+      const analyser = ctx.current.createAnalyser();
+      src.connect( analyser );
+      analyser.connect(ctx.current.destination);
+      setAnalyser( analyser );
+    }
+  },[ audioRef ]);
 
   return (
     <Router>
@@ -154,6 +158,10 @@ function App() {
             <Scene isPlaying={isPlaying} analyser={analyser}/>
           </Suspense>
         </Canvas>
+        <ReactAudioPlayer
+          src={mp3}
+          ref={ element => { setAudioRef( element ) } }
+        />
         { isLoaded && <UI isPlaying={isPlaying} playHandler={playHandler}/> }
       </main>
     </Router>

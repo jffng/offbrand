@@ -62,6 +62,16 @@ nav a {
   line-height: 1.2;
 }
 
+button > svg {
+  fill: none;
+  width: 64px;
+  height: 64px;
+}
+
+button > svg path {
+  fill: white;
+}
+
 button:hover,
 nav a:hover {
   text-underline-offset: -3px;

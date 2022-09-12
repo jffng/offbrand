@@ -23,7 +23,7 @@ const About = () => {
             The expression that there is nothing to express, nothing with which to express, nothing from which to express, no power to express, no desire to express, together with the obligation to express.<br/>&emsp;— Samuel Beckett
         </em></p>
         <p>
-            Synthesizing these ideas into works that resonate with others is something I feel I have yet to achieve, but will endeavor to try via platforms like this and with others whose creative visions align, in service of a scene, culture, and community of friends and collaborators that continues to shape me.
+            Synthesizing these ideas into works that resonate with others is something I feel I have yet to achieve, but will keep trying via platforms like this and with others whose creative visions align, in service of a scene, culture, and community of friends and collaborators that continues to shape me.
         </p>
         <p>
             11 September, 2022
