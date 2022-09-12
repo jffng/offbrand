@@ -8,7 +8,7 @@ const About = () => {
         maxHeight: '100%',
     }}>
         <p>
-        off brand is a project and moniker of jeff ong.
+        off brand is a project and moniker of <a href="https://jffng.com/work">jeff ong</a>.
         </p>
         <p>
         It is both a personal gesture made public towards processing sounds, aesthetics, and ideas consumed in the dance music milieu, and a play on the language of marketing and late capitalism — an attempt to resist the increasing commoditization of all aspects of creative life and imagine an alternative.
@@ -30,6 +30,9 @@ const About = () => {
         </p>
         <p style={{fontSize: 'var(--font-size--sm'}}>
             Logo and "Took a Trip" cover design and shader consulting by <a href="https://www.wipawe.com/">Wipawe</a>.
+        </p>
+        <p style={{fontSize: 'var(--font-size--sm'}}>
+            Source photo from <a href="https://gordonwantuch.com/">Gordon Wantuch</a>.
         </p>
         <p style={{fontSize: 'var(--font-size--sm'}}>
             Image warping shader is a based on <a href="https://observablehq.com/@mbostock/image-warping">Bostock's</a>.
