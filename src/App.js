@@ -14,8 +14,7 @@ import About from './components/about';
 import Mixes from './components/mixes';
 import rainyWindow from './assets/rainy-window.jpg';
 import background from './assets/background.webp';
-import { ReactComponent as Play } from './assets/play.svg';
-import { ReactComponent as Pause } from './assets/pause.svg';
+import PlayerUI from './components/playerUI';
 import { ReactComponent as Text } from './assets/text.svg';
 import { ReactComponent as Logo } from './assets/off.svg';
 import mp3 from './assets/took-a-trip.mp3';
@@ -90,7 +89,7 @@ function Scene( { isPlaying, analyser, setDb } ) {
   )
 }
 
-function UI( { playHandler, isPlaying }) { 
+function UI( props ) { 
   return (
     <div className="ui-container">
         <nav style={{paddingBottom: '.5rem', borderBottom: '2px solid white', marginBottom: '2rem'}}>
@@ -99,7 +98,7 @@ function UI( { playHandler, isPlaying }) {
           <Link to="/mixes">Mixes</Link>
           <a id='bandcamp-link' rel="noreferrer" href='https://offbrandnyc.bandcamp.com' target="_blank">Music 🔗</a>
         </nav>
-        <button id='play-button' onClick={playHandler}>{ isPlaying ? <Pause/> : <Play/> }</button>
+        <PlayerUI {...props} />
         <Routes>
           <Route path="/" element={
             <>

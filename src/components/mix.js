@@ -16,10 +16,11 @@ const Mix = ( props ) => {
                 }}>{ name }</h3>
                 <span style={{fontSize: 'var(--font-size--sm)'}}>{ published }</span>
             </div>
-            <ReactPlayer url={url} options={{
-                color: '#ffffff'
-            }
-            }/>
+            <ReactPlayer 
+                url={url}
+                width={'100%'}
+                height={'320px'}
+            />
             <p style={{fontSize: 'var(--font-size--sm)'}}>{ about }</p>
         </div>
     );
